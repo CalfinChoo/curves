@@ -3,8 +3,11 @@ from matrix import *
 
 
 def add_circle( points, cx, cy, cz, r, step ):
-    for i in range(1 / step):
-        x = r * math.cos(2 * Math.pi )
+    for i in range(int(1 / step)):
+        x = r * math.cos(2 * math.pi * (i + 1) / (1/step)) + cx
+        y = r * math.sin(2 * math.pi * (i + 1) / (1/step)) + cy
+        points.append([x, y, cz, 1])
+
 
 def add_curve( points, x0, y0, x1, y1, x2, y2, x3, y3, step, curve_type ):
     # if (curve_type == "bezier"):
