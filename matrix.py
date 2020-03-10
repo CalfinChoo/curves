@@ -40,6 +40,10 @@ def make_hermite():
     return t
 
 def generate_curve_coefs( p0, p1, p2, p3, t ):
+    # points = [[p0, p1, p2, p3]]
+    # b = make_bezier()
+    # matrix_mult(b, points)
+    # return points[0][0] * (t**3) + points[0][1] * (t**2) + points[0][2] * t + points[0][3]
     a = -p0 + (3 * p1) - (3 * p2) + p3
     b = (3 * p0) - (6 * p1) + (3 * p2)
     c = (-3 * p0) + (3 * p1)

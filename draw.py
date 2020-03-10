@@ -3,16 +3,26 @@ from matrix import *
 
 
 def add_circle( points, cx, cy, cz, r, step ):
+    out = []
     for i in range(int(1 / step)):
         x = r * math.cos(2 * math.pi * (i + 1) / (1/step)) + cx
         y = r * math.sin(2 * math.pi * (i + 1) / (1/step)) + cy
         points.append([x, y, cz, 1])
+        if (i == 0): out = [x, y, cz, 1]
+        else: points.append([x, y, cz, 1])
+    points.append(out)
 
 
 def add_curve( points, x0, y0, x1, y1, x2, y2, x3, y3, step, curve_type ):
-    # if (curve_type == "bezier"):
-    #     eq =
-    pass
+    out = []
+    if (curve_type == "bezier"):
+        for i in range(int(1 / step)):
+            x = generate_curve_coefs(x0, x1, x2, x3, step * i)
+            y = generate_curve_coefs(y0, y1, y2, y3, step * i)
+            print(str(x) + ", " + str(y) + "\n")
+            points.append([x, y, 0, 1])
+            if (i > 0 and i < int(1/step) - 1): points.append([x, y, 0, 1])
+
 
 
 def draw_lines( matrix, screen, color ):
