@@ -10,8 +10,8 @@ z0  z1  ... zn
 import math
 
 def make_bezier():
+    # return [[-1, 3, -3, 1], [3, -6, 3, 0], [-3, 3, 0, 0], [1, 0, 0, 0]]
     t = new_matrix()
-    ident(t)
     t[0][0] = -1
     t[1][0] = 3
     t[2][0] = -3
@@ -26,7 +26,6 @@ def make_bezier():
 
 def make_hermite():
     t = new_matrix()
-    ident(t)
     t[0][0] = 2
     t[1][0] = -2
     t[2][0] = 1
@@ -40,15 +39,12 @@ def make_hermite():
     return t
 
 def generate_curve_coefs( p0, p1, p2, p3, t ):
-    # points = [[p0, p1, p2, p3]]
-    # b = make_bezier()
-    # matrix_mult(b, points)
-    # return points[0][0] * (t**3) + points[0][1] * (t**2) + points[0][2] * t + points[0][3]
-    a = -p0 + (3 * p1) - (3 * p2) + p3
-    b = (3 * p0) - (6 * p1) + (3 * p2)
-    c = (-3 * p0) + (3 * p1)
-    d = p0
-    return (a * (t**3) + b * (t**2) + c * t + d)
+    points = [[p0, p1, p2, p3]]
+    if (t == 'bezier'):
+        matrix_mult(make_bezier(), points)
+    else:
+        matrix_mult(make_hermite(), points)
+    return points
 
 
 
